@@ -3,13 +3,18 @@ import socket
 import tkinter as tk
 from tkinter.scrolledtext import ScrolledText
 
+from src.emulator.settings import Settings
 from src.emulator.shell import Shell
+from src.emulator.startup import run_script
 
 
 class TerminalWindow:
-    def __init__(self, root: tk.Tk, shell: Shell) -> None:
+    def __init__(
+        self, root: tk.Tk, shell: Shell, settings: Settings
+    ) -> None:
         self.root = root
         self.shell = shell
+        self.settings = settings
         user = getpass.getuser()
         host = socket.gethostname()
         self.prompt = f"{user}@{host}:~$"
@@ -38,6 +43,9 @@ class TerminalWindow:
         self.input.bind("<Return>", self.on_submit)
         self.input.focus_set()
         self.append("Эмулятор UNIX. Команды: ls, cd, exit")
+        self.show_settings()
+        if self.settings.script_path is not None:
+            self.root.after(50, self.run_startup)
 
     def append(self, value: str) -> None:
         if not value:
@@ -46,6 +54,26 @@ class TerminalWindow:
         self.output.insert(tk.END, value + "\n")
         self.output.see(tk.END)
         self.output.configure(state=tk.DISABLED)
+
+    def show_settings(self) -> None:
+        pairs = (
+            ("CLI --vfs", self.settings.cli_vfs),
+            ("CLI --script", self.settings.cli_script),
+            ("CLI --config", self.settings.config_path),
+            ("YAML vfs", self.settings.file_vfs),
+            ("YAML script", self.settings.file_script),
+            ("Итоговый VFS", self.settings.vfs_path),
+            ("Итоговый скрипт", self.settings.script_path),
+        )
+        for label, value in pairs:
+            self.append(f"[config] {label}: {value or '-'}")
+
+    def run_startup(self) -> None:
+        self.append("[script] Выполнение стартового скрипта")
+        run_script(self.settings.script_path, self.shell, self.append)
+        if self.shell.exit_requested:
+            self.input.configure(state=tk.DISABLED)
+            self.root.after(100, self.root.destroy)
 
     def on_submit(self, event: object = None) -> None:
         line = self.input.get()

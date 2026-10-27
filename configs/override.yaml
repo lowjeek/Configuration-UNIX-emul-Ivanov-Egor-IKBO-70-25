@@ -1,0 +1,2 @@
+vfs: vfs/minimal.xml
+script: scripts/success.txt
