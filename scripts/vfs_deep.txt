@@ -1,0 +1,9 @@
+ls
+ls /home
+cd /home
+ls
+cd student
+ls docs
+cd docs
+ls
+cd /

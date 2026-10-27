@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<filesystem>
+    <dir name="home">
+        <dir name="student">
+            <dir name="docs">
+                <file name="notes.txt" encoding="text">Homework</file>
+                <file name="data.bin" encoding="base64">AAECAwQFBg==</file>
+            </dir>
+            <file name="profile.txt" encoding="text">Student</file>
+        </dir>
+    </dir>
+    <dir name="etc">
+        <file name="config.txt" encoding="text">mode=demo</file>
+    </dir>
+</filesystem>

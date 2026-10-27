@@ -1,2 +1,2 @@
 vfs: vfs/minimal.xml
-script: scripts/success.txt
+script: scripts/vfs_basic.txt

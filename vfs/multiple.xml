@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<filesystem>
+    <dir name="home">
+        <file name="readme.txt" encoding="text">Welcome to VFS</file>
+        <file name="image.bin" encoding="base64">AAECAwQ=</file>
+    </dir>
+    <dir name="tmp" />
+    <file name="version.txt" encoding="text">1.0</file>
+</filesystem>

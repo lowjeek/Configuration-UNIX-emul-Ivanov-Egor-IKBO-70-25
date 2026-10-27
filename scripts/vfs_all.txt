@@ -1,0 +1,15 @@
+ls
+ls /etc
+ls /home/student/profile.txt
+cd /home
+ls
+cd student
+ls docs
+cd docs
+ls
+cd ..
+ls
+cd /
+ls /home
+cd /missing
+ls

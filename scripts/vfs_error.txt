@@ -1,0 +1,3 @@
+ls
+cd /does_not_exist
+ls
